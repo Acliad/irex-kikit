@@ -113,7 +113,7 @@
 		(name "text7:Text")
 		(pos 81.0002 6.3002)
 	)
-	(tbtext "Sheet: ${COMMENT9}"
+	(tbtext "Sheet: ${#}/${##}"
 		(name "text8:Text")
 		(pos 48 10.4)
 		(font bold)
@@ -150,21 +150,22 @@
 	)
 	(tbtext "Engineer: ${COMMENT1}"
 		(name "text12:Text")
-		(pos 97.0002 10.4002)
+		(pos 97 10.4)
+	)
+	(tbtext "ECAD Version"
+		(name "text13:Text")
+		(pos 48 6.746)
+		(maxlen 25)
+	)
+	(tbtext "${KICAD_VERSION}"
+		(name "text14:Text")
+		(pos 48 4)
+		(maxlen 25)
 	)
 	(tbtext "${COMMENT2}"
-		(name "text13:Text")
-		(pos 48 7)
-		(maxlen 25)
-	)
-	(tbtext "${COMMENT3}"
-		(name "text14:Text")
-		(pos 48.0002 4.0002)
-		(maxlen 25)
-	)
-	(tbtext "${COMMENT4}"
 		(name "text15:Text")
-		(pos 28.0002 14.0002)
+		(pos 22.92 14.254)
+		(justify right)
 		(maxlen 25)
 	)
 	(line
