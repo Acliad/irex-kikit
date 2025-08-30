@@ -7,7 +7,7 @@
         "description": "",
         "fail_on_error": true,
         "format": "report",
-        "output_filename": "DRC.txt",
+        "output_filename": "DRC-${PROJECTNAME}.txt",
         "parity": true,
         "report_all_track_errors": false,
         "severity": 48,
@@ -25,7 +25,7 @@
         "format": "csv",
         "gerber_board_edge": true,
         "negate_bottom_x": false,
-        "output_filename": "./Positions.csv",
+        "output_filename": "./positions-${PROJECTNAME}.csv",
         "side": "both",
         "single_file": true,
         "smd_only": false,
@@ -38,7 +38,7 @@
       "description": "Process position data for JLC",
       "id": "d6ad33e8-c16a-4145-b13a-1bf0e9311bc7",
       "settings": {
-        "command": "python3 '${KIPRJMOD}/process-placement.py' ./Release/Production/Positions-all-pos.csv",
+        "command": "python3 '${KIPRJMOD}/process-placement.py' './Release/Production/positions-${PROJECTNAME}-all-pos.csv'",
         "description": "",
         "ignore_exit_code": false,
         "output_filename": "",
@@ -222,7 +222,7 @@
         "include_excluded_from_bom": false,
         "keep_line_breaks": false,
         "keep_tabs": false,
-        "output_filename": "./BOM_itemized.csv",
+        "output_filename": "./BOM_itemized-${PROJECTNAME}.csv",
         "ref_delimiter": ", ",
         "ref_range_delimiter": "",
         "sort_asc": true,
@@ -321,7 +321,7 @@
         "include_excluded_from_bom": false,
         "keep_line_breaks": false,
         "keep_tabs": false,
-        "output_filename": "./BOM.csv",
+        "output_filename": "./BOM-${PROJECTNAME}.csv",
         "ref_delimiter": ", ",
         "ref_range_delimiter": "",
         "sort_asc": true,
@@ -486,7 +486,7 @@
       ],
       "settings": {
         "format": "zip",
-        "output_path": "./Release/Production/gerbers.zip"
+        "output_path": "./Release/Production/gerbers-${PROJECTNAME}.zip"
       },
       "type": "archive"
     },
