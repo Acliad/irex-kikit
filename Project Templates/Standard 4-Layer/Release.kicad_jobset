@@ -38,7 +38,7 @@
       "description": "Process position data for JLC",
       "id": "d6ad33e8-c16a-4145-b13a-1bf0e9311bc7",
       "settings": {
-        "command": "python3 '${KIPRJMOD}/process-placement.py' './Release/Production/positions-${PROJECTNAME}-all-pos.csv'",
+        "command": "python3 '${KIPRJMOD}/process-placement.py' '${JOBSET_OUTPUT_WORK_PATH}/positions-${PROJECTNAME}-all-pos.csv'",
         "description": "",
         "ignore_exit_code": false,
         "output_filename": "",
@@ -470,7 +470,8 @@
       "description": "Position Data",
       "id": "51e52452-f6aa-497f-b881-81fc43e1ccb0",
       "only": [
-        "f4b7a270-034e-4a2f-b072-ab24647dac8f"
+        "f4b7a270-034e-4a2f-b072-ab24647dac8f",
+        "d6ad33e8-c16a-4145-b13a-1bf0e9311bc7"
       ],
       "settings": {
         "output_path": "./Release/Production/"
@@ -489,17 +490,6 @@
         "output_path": "./Release/Production/gerbers-${PROJECTNAME}.zip"
       },
       "type": "archive"
-    },
-    {
-      "description": "Process position data for JLC",
-      "id": "98040d70-bec1-45ef-861e-8ff8fd0b8e87",
-      "only": [
-        "d6ad33e8-c16a-4145-b13a-1bf0e9311bc7"
-      ],
-      "settings": {
-        "output_path": "./Release/Production"
-      },
-      "type": "folder"
     },
     {
       "description": "Mechanical",
