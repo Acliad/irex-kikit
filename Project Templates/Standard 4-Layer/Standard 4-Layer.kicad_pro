@@ -561,7 +561,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "${PROJECTNAME}.step",
       "svg": "",
       "vrml": ""
     },
