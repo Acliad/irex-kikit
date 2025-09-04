@@ -2,6 +2,11 @@
 
 A collection of templates, settings, etc. that I regularly use for KiCad.
 
+# ☑️ TODOs And Wants
+- Create a way to auto-sync updated Drawing Page templates to embedded files in project templates
+- Create a way to auto-sync updated Release.kicad_jobset
+  - Different layer number templates require slightly altered jobsets, but generally want to keep the same
+
 ## 📄 License
 
 This repository uses a dual licensing approach:
