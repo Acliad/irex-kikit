@@ -49,9 +49,22 @@ def _get_config_path() -> Path:
             f"Could not find the config file for {get_copper_layer_count(board)} layers at {config_file_path}")
     return config_file_path
 
+def _ensure_board2pdf():
+    if not KICAD9_3RD_PARTY.exists():
+        print( "Could not find the KICAD9_3RD_PARTY directory. Is the environment variable set correctly?"
+              f"\nValue is: {KICAD9_3RD_PARTY}")
+        # Just quit for now
+        exit(1)
+    if not BOARD2PDF_PATH.exists():
+        print( "Could not find the board2pdf directory. Is it installed via the Plugin Manager?"
+              f"\nExpected at {BOARD2PDF_PATH}")
+        # Just quit for now
+        exit(1)
+
 def generate_pdf(board_path: Path, config_path: Path, suffix: str = ""):
     """Generates a fabrication PDF from the KiCad board file.
     """
+    _ensure_board2pdf()
     python_kicad_path = find_kicad_python()
     if not python_kicad_path:
         raise RuntimeError("Could not find the KiCad bundled python executable.")
