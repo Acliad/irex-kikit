@@ -25,6 +25,20 @@ python -m kikit_tools.<module> <arguments to module>
 ```
 Note when doing this that some expected KiCad environment variables will not be set, so some tools may not work as expected. You can add them to your shell environment adhoc if just testing.
 
+## Execute Command Wrappers
+As of the creation of this releasing workflow, the jobset "Execute command" environment is very fragile and does not respect many common environment variable tricks. To work around this, there are two wrapper scripts provided to make it easier to run python tools from within KiCad.
+- `execute-command-python.sh`
+- `execute-command-python.bat`
+
+These are UNIX and Windows wrappers around the python venv that setup the environment and allow proper execution of python scripts from within KiCad. They're intended to be called from KiCad, but can be used within a terminal as well. In general, they should not be needed from a terminal shell. 
+
+### The polyglot script
+Because KiCad on Windows only supports `.bat` files for the "Execute command" (i.e., a call to `execute-command-python` won't auto resolve to `execute-command-python.bat` like it would in a normal cmd prompt), a polyglot script is provided that is both a valid bash script and a valid batch script. This allows you to call `polyglot-execute-command-python.bat` from either environment and have it correctly resolve to the platform-dependant wrapper. It *must* end in `.bat` to work in Windows and macOS doesn't care about the extension.
+
+This is the most "how-ya-doin" part of this setup and I would like to deprecated it once a better solution is found (or created within KiCad). 
+
+This polyglot script is based on the excellent work from [llamasoft](https://github.com/llamasoft/polyshell/blob/master/polyshell.txt).
+
 ## Releaser
 The Releaser folder contains tooling for automated releasing of a finished design. This includes on-click generation of PDF documents, gerbers, BOM, placement, and mechanical exports from the KiCad jobset. It also maintains a script for locally installing a python bundle that contains all necessary dependencies.
 
