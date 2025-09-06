@@ -14,8 +14,8 @@ See the [Releaser README](scripting/readme.md) for more details and instructions
 
 # ☑️ TODOs And Wants
 - Create a way to auto-sync updated Drawing Page templates to embedded files in project templates
-- Create a way to auto-sync updated Release.kicad_jobset
-  - Different layer number templates require slightly altered jobsets, but generally want to keep the same
+- ~~Create a way to auto-sync updated Release.kicad_jobset~~
+  - ~~Different layer number templates require slightly altered jobsets, but generally want to keep the same~~
 
 ## 📄 License
 
