@@ -11,7 +11,6 @@ import subprocess
 from pathlib import Path
 from kipy import KiCad
 from kipy.proto.common.types import DocumentType
-from kipy.errors import ConnectionError, ApiError
 
 
 def _find_kicad_python_windows() -> str | None:

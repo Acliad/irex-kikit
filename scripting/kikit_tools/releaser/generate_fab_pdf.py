@@ -9,6 +9,7 @@ from pathlib import Path
 from kipy import KiCad
 from kipy.board import Board, BoardStackupLayer
 from kikit_tools.utils import find_kicad_python, get_kikit_tools_path, get_open_board_path
+from kipy.errors import ApiError
 import subprocess
 
 # ${KICAD9_3RD_PARTY}/plugins/com_gitlab_dennevi_Board2Pdf/board2pdf-cli.py --ini '${KIPRJMOD}/board2pdf_Fab_4L.config.ini' --ext _FAB '${PROJECTNAME}.kicad_pcb'
@@ -35,16 +36,35 @@ def get_copper_layer_count(board: Board) -> int:
 
 def _get_config_path() -> Path:
     kicad = KiCad()
-    board = kicad.get_board()
+    try:
+        board = kicad.get_board()
+    except (ApiError) as e:
+        print(f"Error connecting to KiCad, is the board file open?")
+        # Just quit for now
+        exit(1)
+
     config_file_path = CONFIG_FILE_DIR / CONFIG_FILE_FORMAT_STR.format(layer_count=get_copper_layer_count(board))
     if not config_file_path.exists():
         raise FileNotFoundError(
             f"Could not find the config file for {get_copper_layer_count(board)} layers at {config_file_path}")
     return config_file_path
 
+def _ensure_board2pdf():
+    if not KICAD9_3RD_PARTY.exists():
+        print( "Could not find the KICAD9_3RD_PARTY directory. Is the environment variable set correctly?"
+              f"\nValue is: {KICAD9_3RD_PARTY}")
+        # Just quit for now
+        exit(1)
+    if not BOARD2PDF_PATH.exists():
+        print( "Could not find the board2pdf directory. Is it installed via the Plugin Manager?"
+              f"\nExpected at {BOARD2PDF_PATH}")
+        # Just quit for now
+        exit(1)
+
 def generate_pdf(board_path: Path, config_path: Path, suffix: str = ""):
     """Generates a fabrication PDF from the KiCad board file.
     """
+    _ensure_board2pdf()
     python_kicad_path = find_kicad_python()
     if not python_kicad_path:
         raise RuntimeError("Could not find the KiCad bundled python executable.")
@@ -58,5 +78,11 @@ def generate_pdf(board_path: Path, config_path: Path, suffix: str = ""):
     
 if __name__ == "__main__":
     config_file_path = _get_config_path()
-    board_path = get_open_board_path()
+    try:
+        board_path = get_open_board_path()
+    except (ApiError) as e:
+        print(f"Error connecting to KiCad, is the board file open?")
+        # Just quit for now
+        exit(1)
+
     generate_pdf(board_path=board_path, config_path=config_file_path, suffix=FILE_SUFFIX_FAB)
