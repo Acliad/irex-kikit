@@ -1,9 +1,14 @@
 # Overview
-This folder contains scripting/automation kikit_tools. 
+This folder contains resources for custom scripts and automation tools for KiCad. The main focus is on the Releaser toolset, which automates the generation of manufacturing files and documentation for PCB designs.
 
-## Python Environment
+Once you follow the setup instructions below, you should be able to run the releaser in KiCad by simply clicking the "Generate All Destinations" button in the jobset. This assumes your project was started from the KiKit project template, which includes the necessary configurations. 
+
+# Setup
+
+### Python Environment
 The tools in this folder are designed to use a `python` environment. The required packages are listed in `requirements.txt`. To make the environment simple and reliable, it is required that you use a virtual environment. To set this up:
 - Install Python 3.13
+  - Technically, most or all recent versions of Python 3 should work, but this is the version I develop and test with
   - It's recommended to use either `pyenv` or install via homebrew if on macOS. Either way, you just need python available
 - Create a virtual environment
     ```bash
@@ -14,6 +19,17 @@ The tools in this folder are designed to use a `python` environment. The require
     ./python-kikit/bin/pip install -r requirements.txt
     ```
 
+### Environment Variables
+Some of the tools require certain environment variables to be set. These are expected to be available in KiCad, added via Preferences -> Configure Paths. You can also add them to your shell environment if you need to develop more easily. The required variables are:
+- `IREX_KIKIT_VENV_DIR`: The full path to the root of the python virtual environment created above (e.g., `/path/to/irex-kikit/python-kikit`)
+- `IREX_KIKIT_ROOT_DIR`: The full path to the root of this repository (e.g., `/path/to/irex-kikit`)
+
+<img src="../Resources/configure_paths_menu.png" alt="Configure Paths Menu" width="400"/>
+<img src="../Resources/configure_paths_dialog.png" alt="Configure Paths Dialog" width="400"/>
+
+# Implementation Notes
+
+## `execute-command-python` Shim
 The current KiCad `execute command` environment is extremely fragile and fails silently with many of the traditional path and environment variable tricks. The current workaround is to use a shell script that activates the virtual environment and then runs the desired tool. Thus, when using scripts from within KiCad, you should use the following command, which sets up the environment and runs python
 ```bash
 ${IREX_KIKIT_ROOT_DIR}/scripting/execute-command-python.sh -m kikit_tools.<module> <arguments to module>
@@ -38,15 +54,3 @@ Because KiCad on Windows only supports `.bat` files for the "Execute command" (i
 This is the most "how-ya-doin" part of this setup and I would like to deprecated it once a better solution is found (or created within KiCad). 
 
 This polyglot script is based on the excellent work from [llamasoft](https://github.com/llamasoft/polyshell/blob/master/polyshell.txt).
-
-## Releaser
-The Releaser folder contains tooling for automated releasing of a finished design. This includes on-click generation of PDF documents, gerbers, BOM, placement, and mechanical exports from the KiCad jobset. It also maintains a script for locally installing a python bundle that contains all necessary dependencies.
-
-### Setup
-The Releaser requires a couple environment variables to be set. In KiCad, go to Preferences -> Configure Paths and add the following variables:
-- `IREX_KIKIT_VENV_DIR`: **TODO**
-- `IREX_KIKIT_ROOT_DIR`: **TODO**
-
-**TODO: Expand with images**
-You may also need to enable KiCad API in settings
-**TODO: Add images**
