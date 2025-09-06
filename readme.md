@@ -1,6 +1,9 @@
 # IRex KiCad Kit
 
-A collection of templates, settings, etc. that I regularly use for KiCad.
+A collection of workflow helpers, templates, settings, etc. that I regularly use for KiCad.
+
+# Tools
+**TODO: Add links to tools readmes**
 
 # ☑️ TODOs And Wants
 - Create a way to auto-sync updated Drawing Page templates to embedded files in project templates

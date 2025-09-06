@@ -38,7 +38,7 @@
       "description": "Process position data for JLC",
       "id": "d6ad33e8-c16a-4145-b13a-1bf0e9311bc7",
       "settings": {
-        "command": "python3 '${KIPRJMOD}/process-placement.py' '${JOBSET_OUTPUT_WORK_PATH}/positions-${PROJECTNAME}-all-pos.csv'",
+        "command": "${IREX_KIKIT_ROOT_DIR}/scripting/execute-command-python -m kikit_tools.releaser.process_placement '${JOBSET_OUTPUT_WORK_PATH}/positions-${PROJECTNAME}*.csv'",
         "description": "",
         "ignore_exit_code": false,
         "output_filename": "",
@@ -358,7 +358,7 @@
       "description": "Export PCB Fab PDF",
       "id": "f9ef66d8-e0d4-42a9-8211-66e231664163",
       "settings": {
-        "command": "python3 '${KIPRJMOD}/kicad-python.py' ${KICAD9_3RD_PARTY}/plugins/com_gitlab_dennevi_Board2Pdf/board2pdf-cli.py --ini '${KIPRJMOD}/board2pdf_Fab_4L.config.ini' --ext _FAB '${PROJECTNAME}.kicad_pcb'",
+        "command": "${IREX_KIKIT_ROOT_DIR}/scripting/execute-command-python -m kikit_tools.releaser.generate_fab_pdf",
         "description": "",
         "ignore_exit_code": false,
         "output_filename": "",
@@ -370,7 +370,7 @@
       "description": "Export PCB Asy PDF",
       "id": "e3f9a3f1-2c06-4053-b8ad-3cab0c6e2d34",
       "settings": {
-        "command": "python3 '${KIPRJMOD}/kicad-python.py' ${KICAD9_3RD_PARTY}/plugins/com_gitlab_dennevi_Board2Pdf/board2pdf-cli.py --ini '${KIPRJMOD}/board2pdf_Asy.config.ini' --ext _ASY '${PROJECTNAME}.kicad_pcb'",
+        "command": "${IREX_KIKIT_ROOT_DIR}/scripting/execute-command-python -m kikit_tools.releaser.generate_assembly_pdf",
         "description": "",
         "ignore_exit_code": false,
         "output_filename": "",
