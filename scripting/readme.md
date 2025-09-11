@@ -4,6 +4,7 @@ This folder contains resources for custom scripts and automation tools for KiCad
 Once you follow the setup instructions below, you should be able to run the releaser in KiCad by simply clicking the "Generate All Destinations" button in the jobset. This assumes your project was started from the KiKit project template, which includes the necessary configurations. 
 
 # Setup
+**NOTE: You may need to make the appropriate scripts executable for your platform! Make sure `execute-command-python.sh` (macOS), `execute-command-python.bat` (Windows), and `polyglot-execute-command-python.bat` (all platforms) are executable.**
 
 ### Python Environment
 The tools in this folder are designed to use a `python` environment. The required packages are listed in `requirements.txt`. To make the environment simple and reliable, it is required that you use a virtual environment. To set this up:
